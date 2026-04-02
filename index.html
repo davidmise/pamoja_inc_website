@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamoja INC - Software Development, Cloud, AI & Cybersecurity Solutions</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="title" content="Pamoja INC - Software Development, Cloud, AI & Cybersecurity Solutions">
+    <meta name="description" content="Pamoja INC provides end-to-end technology services including Web Development, Mobile Apps, Cloud Solutions, AI & Machine Learning, Cybersecurity, Email Hosting, and Data Analytics for businesses in Tanzania and beyond.">
+    <meta name="keywords" content="Pamoja INC, Web Development Tanzania, Mobile App Development, Cloud Solutions Tanzania, AI Services, Cybersecurity Company, Data Analytics, IT Solutions, Software Company Tanzania, Email Hosting, Business Email">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Pamoja INC">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Pamoja INC - Innovative Tech & Digital Solutions">
+    <meta property="og:description" content="We build scalable web and mobile apps, AI systems, cloud infrastructure, cybersecurity solutions, and data analytics platforms.">
+    <meta property="og:image" content="https://pamojainc.co.tz/logo.png">
+    <meta property="og:url" content="https://pamojainc.co.tz">
+    <meta property="og:site_name" content="Pamoja INC">
+
+    <!-- Twitter Meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pamoja INC - Digital Solutions & IT Services">
+    <meta name="twitter:description" content="Custom software, AI, cloud services, cybersecurity, and analytics for modern businesses.">
+    <meta name="twitter:image" content="https://pamojainc.co.tz/logo.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'pamoja-red': '#e63946',
+                        'pamoja-dark': '#1d3557',
+                        'pamoja-light': '#f1faee',
+                        'whatsapp-green': '#25D366',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-link {
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e63946;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .service-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+
+        .pricing-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #e63946;
+        }
+
+        .pricing-toggle input:checked + .slider {
+            background-color: #e63946;
+        }
+
+        .pricing-toggle input:checked + .slider::before {
+            transform: translateX(24px);
+        }
+
+        .slider {
+            width: 52px;
+            height: 28px;
+            background-color: #cbd5e1;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .slider::before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: white;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s;
+        }
+
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            max-height: 400px;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            width: 44px;
+            height: 24px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+            padding: 0;
+        }
+
+        .dark .theme-toggle {
+            background: #475569;
+        }
+
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+
+        .dark .theme-toggle::before {
+            transform: translateX(20px);
+        }
+
+        /* Section decorative SVGs */
+        .section-decoration {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dark .pricing-card,
+        .dark .service-card {
+            border-color: rgba(255,255,255,0.08);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 dark:bg-gray-950 dark:text-gray-200">
+
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-950 border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center">
+                    <img src="Pamoja-inc-Logo.png" alt="Pamoja INC" class="h-10">
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-7">
+                    <a href="#home" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-pamoja-red">Home</a>
+                    <a href="#services" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-pamoja-red">Services</a>
+                    <a href="#email-hosting" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-pamoja-red">Email Hosting</a>
+                    <a href="#technology" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-pamoja-red">Technology</a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-pamoja-red">Contact</a>
+                    <a href="https://pcrm.pamojainc.co.tz/" target="_blank" rel="noopener noreferrer"
+                       class="bg-pamoja-dark text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors">
+                        PCRM Tool <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                    </a>
+                    <!-- <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode"></button> -->
+                </div>
+
+                <!-- Mobile: dark toggle + hamburger -->
+                <div class="flex md:hidden items-center gap-3">
+                    <button id="themeToggleMobile" class="theme-toggle" aria-label="Toggle dark mode"></button>
+                    <button id="mobileMenuBtn" class="p-2 text-gray-600 dark:text-gray-300 hover:text-pamoja-red" aria-label="Toggle menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="mobile-menu md:hidden">
+                <div class="py-3 border-t border-gray-100 dark:border-gray-800 flex flex-col gap-1">
+                    <a href="#home" class="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">Home</a>
+                    <a href="#services" class="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">Services</a>
+                    <a href="#email-hosting" class="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">Email Hosting</a>
+                    <a href="#technology" class="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">Technology</a>
+                    <a href="#contact" class="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">Contact</a>
+                    <a href="https://pcrm.pamojainc.co.tz/" target="_blank" rel="noopener noreferrer"
+                       class="block px-3 py-2 text-sm font-medium text-pamoja-red hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">
+                        PCRM Tool <i class="fas fa-external-link-alt text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative py-20 md:py-28 overflow-hidden" style="background: linear-gradient(135deg, #f5f0f0 0%, #faf3f3 40%, #f0f4f8 100%);">
+        <!-- Red halo glows -->
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-3xl" style="background: rgba(230,57,70,0.12);"></div>
+            <div class="absolute top-0 right-0 w-[450px] h-[450px] rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" style="background: rgba(230,57,70,0.08);"></div>
+            <div class="absolute bottom-0 left-0 w-[350px] h-[350px] rounded-full blur-3xl -translate-x-1/3 translate-y-1/3" style="background: rgba(29,53,87,0.07);"></div>
+        </div>
+        <!-- Full-coverage red dot grid -->
+        <div class="absolute inset-0 -z-10" style="background-image: radial-gradient(circle, #e63946 1.5px, transparent 1.5px); background-size: 28px 28px; opacity: 0.18;"></div>
+        <!-- Corner dot cluster — top right -->
+        <svg class="section-decoration top-8 right-8 w-40 h-40" viewBox="0 0 160 160" style="opacity:0.35"><pattern id="heroDots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2.5" fill="#e63946"/></pattern><rect width="160" height="160" fill="url(#heroDots)"/></svg>
+        <!-- Corner dot cluster — bottom left -->
+        <svg class="section-decoration bottom-8 left-8 w-48 h-36" viewBox="0 0 192 144" style="opacity:0.3"><pattern id="heroDots2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2.5" fill="#e63946"/></pattern><rect width="192" height="144" fill="url(#heroDots2)"/></svg>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-5 leading-tight">
+                Technology Solutions <br class="hidden sm:block">Built for <span class="text-pamoja-red">Your Business</span>
+            </h1>
+            <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8">
+                We design, build, and scale software, cloud infrastructure, and digital products that help businesses across Tanzania grow and compete globally.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="#services" class="bg-pamoja-red text-white font-medium px-6 py-3 rounded-lg hover:bg-red-600 transition-colors">
+                    Explore Services
+                </a>
+                <a href="#contact" class="border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium px-6 py-3 rounded-lg hover:border-pamoja-red hover:text-pamoja-red transition-colors">
+                    Get in Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="relative py-16 bg-gray-50 dark:bg-gray-900 overflow-hidden transition-colors">
+        <!-- Decorative corner shapes -->
+        <svg class="section-decoration -top-1 left-0 w-full" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,40 C480,0 960,0 1440,40 L1440,0 L0,0 Z" fill="currentColor" class="text-white dark:text-gray-950"/></svg>
+        <!-- Abstract circuit lines -->
+        <svg class="section-decoration top-20 right-0 w-48 h-48 opacity-[0.04]" viewBox="0 0 200 200"><line x1="0" y1="50" x2="200" y2="50" stroke="#e63946" stroke-width="1"/><line x1="100" y1="0" x2="100" y2="200" stroke="#e63946" stroke-width="1"/><circle cx="100" cy="50" r="4" fill="#e63946"/><circle cx="100" cy="150" r="4" fill="#e63946"/><circle cx="50" cy="100" r="3" fill="#1d3557"/><circle cx="150" cy="100" r="3" fill="#1d3557"/><rect x="80" y="80" width="40" height="40" rx="4" fill="none" stroke="#e63946" stroke-width="1"/></svg>
+        <svg class="section-decoration bottom-10 left-4 w-40 h-40 opacity-[0.04]" viewBox="0 0 200 200"><polygon points="100,10 190,60 190,140 100,190 10,140 10,60" fill="none" stroke="#1d3557" stroke-width="1.5"/><circle cx="100" cy="100" r="30" fill="none" stroke="#e63946" stroke-width="1"/></svg>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <h2 class="text-3xl font-bold text-center mb-2 dark:text-white">Our <span class="text-pamoja-red">Services</span></h2>
+            <p class="text-gray-500 dark:text-gray-400 text-center mb-10 max-w-xl mx-auto">End-to-end technology services tailored for modern businesses.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="service-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
+                    <div class="w-12 h-12 rounded-lg bg-pamoja-red/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-code text-xl text-pamoja-red"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 dark:text-white">Web Development</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Custom web applications and responsive websites built with modern technologies.</p>
+                </div>
+
+                <div class="service-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
+                    <div class="w-12 h-12 rounded-lg bg-pamoja-red/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-mobile-alt text-xl text-pamoja-red"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 dark:text-white">Mobile Apps</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">iOS and Android applications with seamless user experiences.</p>
+                </div>
+
+                <div class="service-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
+                    <div class="w-12 h-12 rounded-lg bg-pamoja-red/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-cloud text-xl text-pamoja-red"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 dark:text-white">Cloud Solutions</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Scalable cloud infrastructure and migration services.</p>
+                </div>
+
+                <div class="service-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
+                    <div class="w-12 h-12 rounded-lg bg-pamoja-red/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-xl text-pamoja-red"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 dark:text-white">AI & Machine Learning</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Intelligent solutions powered by artificial intelligence.</p>
+                </div>
+
+                <div class="service-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
+                    <div class="w-12 h-12 rounded-lg bg-pamoja-red/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-xl text-pamoja-red"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 dark:text-white">Cybersecurity</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Comprehensive security assessments and protection systems.</p>
+                </div>
+
+                <div class="service-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
+                    <div class="w-12 h-12 rounded-lg bg-pamoja-red/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-database text-xl text-pamoja-red"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 dark:text-white">Data Analytics</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Turn your data into actionable insights and visualizations.</p>
+                </div>
+
+                <div class="service-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
+                    <div class="w-12 h-12 rounded-lg bg-pamoja-red/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-envelope text-xl text-pamoja-red"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 dark:text-white">Email Hosting</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Professional business email with your own domain, reliable uptime, and generous storage.</p>
+                </div>
+            </div>
+        </div>
+
+        <svg class="section-decoration -bottom-1 left-0 w-full" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,0 C480,40 960,40 1440,0 L1440,40 L0,40 Z" fill="currentColor" class="text-white dark:text-gray-950"/></svg>
+    </section>
+
+    <!-- Email Hosting / Pricing Section -->
+    <section id="email-hosting" class="relative py-16 overflow-hidden">
+        <!-- Subtle glow behind pricing -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-pamoja-red/5 blur-3xl -z-10"></div>
+        <!-- Decorative envelope SVG -->
+        <svg class="section-decoration top-8 left-6 w-20 h-20 opacity-[0.05]" viewBox="0 0 100 100"><rect x="10" y="25" width="80" height="55" rx="6" fill="none" stroke="#e63946" stroke-width="2"/><polyline points="10,25 50,58 90,25" fill="none" stroke="#e63946" stroke-width="2"/></svg>
+        <svg class="section-decoration bottom-8 right-6 w-28 h-28 opacity-[0.05]" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#1d3557" stroke-width="1.5"/><circle cx="50" cy="50" r="20" fill="none" stroke="#e63946" stroke-width="1.5"/><line x1="50" y1="10" x2="50" y2="90" stroke="#1d3557" stroke-width="0.5"/><line x1="10" y1="50" x2="90" y2="50" stroke="#1d3557" stroke-width="0.5"/></svg>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <h2 class="text-3xl font-bold text-center mb-2 dark:text-white">Email <span class="text-pamoja-red">Hosting</span></h2>
+            <p class="text-gray-500 dark:text-gray-400 text-center mb-8 max-w-xl mx-auto">
+                Professional business email on your own domain. Reliable, secure, and ready to scale with your team.
+            </p>
+
+            <!-- Billing Toggle -->
+            <div class="flex items-center justify-center gap-3 mb-10">
+                <span id="labelMonthly" class="text-sm font-medium text-gray-800 dark:text-gray-200">Monthly</span>
+                <label class="pricing-toggle relative inline-block" for="billingToggle">
+                    <input type="checkbox" id="billingToggle" class="sr-only" title="Toggle billing period">
+                    <div class="slider"></div>
+                </label>
+                <span id="labelYearly" class="text-sm font-medium text-gray-400">Yearly <span class="text-pamoja-red text-xs font-semibold ml-1">1 month free</span></span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Starter -->
+                <div class="pricing-card bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-6 flex flex-col">
+                    <h3 class="text-lg font-semibold mb-1 dark:text-white">Starter Plan</h3>
+                    <p class="text-gray-400 text-sm mb-4">1 Mailbox &middot; 15 GB Storage</p>
+                    <div class="mb-5">
+                        <span class="price-monthly text-3xl font-bold dark:text-white">10,000</span>
+                        <span class="price-yearly text-3xl font-bold dark:text-white hidden">110,000</span>
+                        <span class="text-gray-400 text-sm ml-1">TZS / <span class="billing-period">mo</span></span>
+                    </div>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-2 mb-6 flex-1">
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> 1 professional email address</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> 15 GB secure mailbox storage</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Webmail, IMAP & POP3 access</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Spam & virus protection</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> 99.9% uptime guarantee</li>
+                    </ul>
+                    <a href="#contact" class="block text-center border border-pamoja-red text-pamoja-red font-medium py-2.5 rounded-lg hover:bg-pamoja-red hover:text-white transition-colors text-sm">Get Started</a>
+                </div>
+
+                <!-- Team (Featured) -->
+                <div class="pricing-card featured bg-white dark:bg-gray-800 rounded-xl p-6 flex flex-col relative">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-pamoja-red text-white text-xs font-semibold px-3 py-1 rounded-full">Popular</span>
+                    <h3 class="text-lg font-semibold mb-1 dark:text-white">Team Plan</h3>
+                    <p class="text-gray-400 text-sm mb-4">3 Mailboxes &middot; 45 GB Storage</p>
+                    <div class="mb-5">
+                        <span class="price-monthly text-3xl font-bold dark:text-white">30,000</span>
+                        <span class="price-yearly text-3xl font-bold dark:text-white hidden">330,000</span>
+                        <span class="text-gray-400 text-sm ml-1">TZS / <span class="billing-period">mo</span></span>
+                    </div>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-2 mb-6 flex-1">
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> 3 professional email addresses</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> 45 GB total storage (15 GB each)</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Webmail, IMAP & POP3 access</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Spam & virus protection</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Shared contacts & calendars</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Priority support</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-pamoja-red text-white font-medium py-2.5 rounded-lg hover:bg-red-600 transition-colors text-sm">Get Started</a>
+                </div>
+
+                <!-- Company -->
+                <div class="pricing-card bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-6 flex flex-col">
+                    <h3 class="text-lg font-semibold mb-1 dark:text-white">Company Plan</h3>
+                    <p class="text-gray-400 text-sm mb-4">5 Mailboxes &middot; 75 GB Storage</p>
+                    <div class="mb-5">
+                        <span class="price-monthly text-3xl font-bold dark:text-white">50,000</span>
+                        <span class="price-yearly text-3xl font-bold dark:text-white hidden">550,000</span>
+                        <span class="text-gray-400 text-sm ml-1">TZS / <span class="billing-period">mo</span></span>
+                    </div>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-2 mb-6 flex-1">
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> 5 professional email addresses</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> 75 GB total storage (15 GB each)</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Webmail, IMAP & POP3 access</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Spam & virus protection</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Shared contacts & calendars</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Admin panel & user management</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-pamoja-red mt-0.5"></i> Dedicated account manager</li>
+                    </ul>
+                    <a href="#contact" class="block text-center border border-pamoja-red text-pamoja-red font-medium py-2.5 rounded-lg hover:bg-pamoja-red hover:text-white transition-colors text-sm">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section id="technology" class="relative py-16 bg-gray-50 dark:bg-gray-900 overflow-hidden transition-colors">
+        <svg class="section-decoration -top-1 left-0 w-full" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,40 C480,0 960,0 1440,40 L1440,0 L0,0 Z" fill="currentColor" class="text-white dark:text-gray-950"/></svg>
+        <!-- Abstract code brackets -->
+        <svg class="section-decoration top-16 left-4 w-24 h-24 opacity-[0.04]" viewBox="0 0 100 100"><text x="10" y="65" font-size="60" font-family="monospace" fill="#e63946">&lt;/&gt;</text></svg>
+        <svg class="section-decoration bottom-12 right-8 w-32 h-32 opacity-[0.04]" viewBox="0 0 200 200"><rect x="20" y="20" width="160" height="160" rx="20" fill="none" stroke="#1d3557" stroke-width="2"/><rect x="50" y="50" width="100" height="100" rx="12" fill="none" stroke="#e63946" stroke-width="1.5"/><rect x="80" y="80" width="40" height="40" rx="6" fill="none" stroke="#1d3557" stroke-width="1"/></svg>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <h2 class="text-3xl font-bold text-center mb-2 dark:text-white">Our <span class="text-pamoja-red">Technology Stack</span></h2>
+            <p class="text-gray-500 dark:text-gray-400 text-center mb-10 max-w-xl mx-auto">Modern, battle-tested tools we use to deliver reliable products.</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="flex flex-col items-center p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <i class="fab fa-react text-3xl text-blue-500 mb-2"></i>
+                    <span class="text-sm font-medium dark:text-gray-200">React</span>
+                </div>
+                <div class="flex flex-col items-center p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <i class="fab fa-node-js text-3xl text-green-600 mb-2"></i>
+                    <span class="text-sm font-medium dark:text-gray-200">Node.js</span>
+                </div>
+                <div class="flex flex-col items-center p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <i class="fab fa-python text-3xl text-yellow-500 mb-2"></i>
+                    <span class="text-sm font-medium dark:text-gray-200">Python</span>
+                </div>
+                <div class="flex flex-col items-center p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <i class="fas fa-database text-3xl text-blue-400 mb-2"></i>
+                    <span class="text-sm font-medium dark:text-gray-200">MongoDB</span>
+                </div>
+                <div class="flex flex-col items-center p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <i class="fab fa-vuejs text-3xl text-green-500 mb-2"></i>
+                    <span class="text-sm font-medium dark:text-gray-200">Vue.js</span>
+                </div>
+                <div class="flex flex-col items-center p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <i class="fab fa-laravel text-3xl text-red-600 mb-2"></i>
+                    <span class="text-sm font-medium dark:text-gray-200">Laravel</span>
+                </div>
+                <div class="flex flex-col items-center p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <i class="fab fa-angular text-3xl text-red-600 mb-2"></i>
+                    <span class="text-sm font-medium dark:text-gray-200">Angular</span>
+                </div>
+                <div class="flex flex-col items-center p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <i class="fas fa-database text-3xl text-orange-500 mb-2"></i>
+                    <span class="text-sm font-medium dark:text-gray-200">MySQL</span>
+                </div>
+            </div>
+        </div>
+
+        <svg class="section-decoration -bottom-1 left-0 w-full" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,0 C480,40 960,40 1440,0 L1440,40 L0,40 Z" fill="currentColor" class="text-white dark:text-gray-950"/></svg>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-16 overflow-hidden">
+        <!-- Contact halo -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full bg-blue-500/5 blur-3xl -z-10"></div>
+        <!-- Decorative rings -->
+        <svg class="section-decoration top-6 right-8 w-20 h-20 opacity-[0.05]" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="#e63946" stroke-width="1.5"/><circle cx="50" cy="50" r="30" fill="none" stroke="#1d3557" stroke-width="1"/><circle cx="50" cy="50" r="15" fill="none" stroke="#e63946" stroke-width="0.8"/></svg>
+        <svg class="section-decoration bottom-6 left-8 w-16 h-16 opacity-[0.05]" viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" rx="10" fill="none" stroke="#1d3557" stroke-width="2"/><rect x="30" y="30" width="40" height="40" rx="6" fill="none" stroke="#e63946" stroke-width="1.5"/></svg>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <h2 class="text-3xl font-bold text-center mb-2 dark:text-white">Get in <span class="text-pamoja-red">Touch</span></h2>
+            <p class="text-gray-500 dark:text-gray-400 text-center mb-10 max-w-xl mx-auto">Have a project in mind? Reach out and let's discuss how we can help.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <!-- Email -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-6 text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-pamoja-red/10 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-envelope text-pamoja-red text-lg"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2 dark:text-white">Email Us</h3>
+                    <a href="mailto:support@pamojainc.co.tz" class="text-pamoja-red text-sm hover:underline">support@pamojainc.co.tz</a>
+                </div>
+
+                <!-- Phone -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-6 text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-pamoja-red/10 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-phone text-pamoja-red text-lg"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2 dark:text-white">Call Us</h3>
+                    <div class="space-y-1">
+                        <a href="tel:+255744648052" class="block text-gray-600 dark:text-gray-400 text-sm hover:text-pamoja-red">+255 744 648 052</a>
+                        <a href="tel:+255686768052" class="block text-gray-600 dark:text-gray-400 text-sm hover:text-pamoja-red">+255 686 768 052</a>
+                    </div>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-6 text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-full bg-green-50 dark:bg-green-900/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-whatsapp text-whatsapp-green text-lg"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2 dark:text-white">WhatsApp</h3>
+                    <a href="https://wa.me/255744648052" target="_blank" rel="noopener noreferrer" class="text-whatsapp-green text-sm font-medium hover:underline">Chat with us</a>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex justify-center gap-4 mt-10">
+                <a href="#" aria-label="Twitter" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-pamoja-red hover:text-white transition-colors">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-pamoja-red hover:text-white transition-colors">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-pamoja-red hover:text-white transition-colors">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-pamoja-red hover:text-white transition-colors">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 dark:border-gray-800 py-6 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+            <p id="copyright" class="text-gray-400 text-sm">&copy; 2026 Pamoja INC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Copyright year
+        document.getElementById('copyright').innerHTML = `&copy; ${new Date().getFullYear()} Pamoja INC. All rights reserved.`;
+
+        // --- Dark mode ---
+        const html = document.documentElement;
+        function setTheme(dark) {
+            html.classList.toggle('dark', dark);
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+        }
+        // Init: default light, respect saved preference
+        if (localStorage.getItem('theme') === 'dark') {
+            html.classList.add('dark');
+        }
+        document.querySelectorAll('#themeToggle, #themeToggleMobile').forEach(btn => {
+            btn.addEventListener('click', () => setTheme(!html.classList.contains('dark')));
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY + 80;
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                const link = document.querySelector(`nav a[href="#${id}"]`);
+                if (link) {
+                    if (scrollY >= top && scrollY < top + height) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Pricing toggle (monthly / yearly)
+        const billingToggle = document.getElementById('billingToggle');
+        const labelMonthly = document.getElementById('labelMonthly');
+        const labelYearly = document.getElementById('labelYearly');
+
+        billingToggle.addEventListener('change', () => {
+            const yearly = billingToggle.checked;
+            document.querySelectorAll('.price-monthly').forEach(el => el.classList.toggle('hidden', yearly));
+            document.querySelectorAll('.price-yearly').forEach(el => el.classList.toggle('hidden', !yearly));
+            document.querySelectorAll('.billing-period').forEach(el => el.textContent = yearly ? 'yr' : 'mo');
+            labelMonthly.classList.toggle('text-gray-800', !yearly);
+            labelMonthly.classList.toggle('dark:text-gray-200', !yearly);
+            labelMonthly.classList.toggle('text-gray-400', yearly);
+            labelYearly.classList.toggle('text-gray-800', yearly);
+            labelYearly.classList.toggle('dark:text-gray-200', yearly);
+            labelYearly.classList.toggle('text-gray-400', !yearly);
+        });
+    </script>
+</body>

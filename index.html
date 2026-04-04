@@ -145,6 +145,121 @@
             z-index: 0;
         }
 
+        /* Hero full-screen + interactive liquid background */
+        #home {
+            --pointer-x: 50%;
+            --pointer-y: 50%;
+            --scroll-offset: 0px;
+            height: calc(100svh - 4rem);
+            min-height: calc(100svh - 4rem);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @supports not (height: 100svh) {
+            #home {
+                height: calc(100vh - 4rem);
+                min-height: calc(100vh - 4rem);
+            }
+        }
+
+        .hero-liquid-layer {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -10;
+        }
+
+        .hero-liquid-layer::after {
+            content: '';
+            position: absolute;
+            inset: -12%;
+            background:
+                radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(230, 57, 70, 0.18), rgba(230, 57, 70, 0.07) 22%, transparent 48%),
+                radial-gradient(circle at calc(20% + var(--scroll-offset)) calc(82% - var(--scroll-offset)), rgba(29, 53, 87, 0.14), transparent 45%),
+                radial-gradient(circle at calc(80% - var(--scroll-offset)) calc(18% + var(--scroll-offset)), rgba(230, 57, 70, 0.10), transparent 42%);
+            filter: blur(2px);
+            transition: background 0.16s linear;
+        }
+
+        .liquid-blob {
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(28px);
+            opacity: 0.45;
+            animation: liquid-drift 12s ease-in-out infinite;
+        }
+
+        .liquid-blob-a {
+            width: 28vw;
+            height: 28vw;
+            min-width: 180px;
+            min-height: 180px;
+            top: 12%;
+            left: 8%;
+            background: rgba(230, 57, 70, 0.16);
+        }
+
+        .liquid-blob-b {
+            width: 32vw;
+            height: 32vw;
+            min-width: 220px;
+            min-height: 220px;
+            bottom: 8%;
+            right: 10%;
+            background: rgba(29, 53, 87, 0.14);
+            animation-delay: -4s;
+            animation-duration: 15s;
+        }
+
+        .liquid-blob-c {
+            width: 24vw;
+            height: 24vw;
+            min-width: 160px;
+            min-height: 160px;
+            top: 35%;
+            right: 30%;
+            background: rgba(230, 57, 70, 0.11);
+            animation-delay: -8s;
+            animation-duration: 18s;
+        }
+
+        .liquid-ripple {
+            position: absolute;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, rgba(230, 57, 70, 0.22) 35%, transparent 72%);
+            transform: translate(-50%, -50%) scale(0.08);
+            animation: liquid-ripple-expand 0.95s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes liquid-drift {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(22px, -18px) scale(1.08);
+            }
+            66% {
+                transform: translate(-24px, 14px) scale(0.94);
+            }
+        }
+
+        @keyframes liquid-ripple-expand {
+            0% {
+                opacity: 0.75;
+                transform: translate(-50%, -50%) scale(0.08);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
         /* ==============================
            FLOATING NAV (landscape only)
            ============================== */
@@ -162,7 +277,8 @@
 
             /* Hero fills full screen */
             #home {
-                min-height: 100vh;
+                height: 100svh;
+                min-height: 100svh;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -282,6 +398,11 @@
 
     <!-- Hero Section -->
     <section id="home" class="relative py-16 sm:py-20 md:py-28 overflow-hidden" style="background: linear-gradient(135deg, #f5f0f0 0%, #faf3f3 40%, #f0f4f8 100%);">
+        <div id="hero-liquid" class="hero-liquid-layer" aria-hidden="true">
+            <div class="liquid-blob liquid-blob-a"></div>
+            <div class="liquid-blob liquid-blob-b"></div>
+            <div class="liquid-blob liquid-blob-c"></div>
+        </div>
         <!-- Red halo glows — scaled for mobile -->
         <div class="absolute inset-0 -z-10">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[500px] sm:h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-3xl" style="background: rgba(230,57,70,0.12);"></div>
@@ -652,6 +773,80 @@
                     floatingNav.classList.remove('nav-hidden');
                 }
             });
+        }
+
+        // Hero liquid interaction (desktop + mobile)
+        const heroSection = document.getElementById('home');
+        const heroLiquid = document.getElementById('hero-liquid');
+
+        if (heroSection && heroLiquid) {
+            const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+            const updatePointer = (clientX, clientY) => {
+                const rect = heroSection.getBoundingClientRect();
+                if (rect.width <= 0 || rect.height <= 0) {
+                    return;
+                }
+
+                const xPercent = clamp(((clientX - rect.left) / rect.width) * 100, 0, 100);
+                const yPercent = clamp(((clientY - rect.top) / rect.height) * 100, 0, 100);
+
+                heroSection.style.setProperty('--pointer-x', `${xPercent.toFixed(2)}%`);
+                heroSection.style.setProperty('--pointer-y', `${yPercent.toFixed(2)}%`);
+            };
+
+            const spawnRipple = (clientX, clientY) => {
+                const rect = heroSection.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height) * 0.72;
+
+                ripple.className = 'liquid-ripple';
+                ripple.style.left = `${clientX - rect.left}px`;
+                ripple.style.top = `${clientY - rect.top}px`;
+                ripple.style.width = `${size}px`;
+                ripple.style.height = `${size}px`;
+
+                heroLiquid.appendChild(ripple);
+                ripple.addEventListener('animationend', () => ripple.remove());
+            };
+
+            const updateScrollOffset = () => {
+                const rect = heroSection.getBoundingClientRect();
+                const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                const progress = clamp((viewportHeight - rect.top) / (viewportHeight + rect.height), 0, 1);
+                const offset = (progress - 0.5) * 38;
+                heroSection.style.setProperty('--scroll-offset', `${offset.toFixed(1)}px`);
+            };
+
+            heroSection.addEventListener('mousemove', (event) => {
+                updatePointer(event.clientX, event.clientY);
+            }, { passive: true });
+
+            heroSection.addEventListener('mouseleave', () => {
+                heroSection.style.setProperty('--pointer-x', '50%');
+                heroSection.style.setProperty('--pointer-y', '50%');
+            });
+
+            heroSection.addEventListener('touchmove', (event) => {
+                if (event.touches.length > 0) {
+                    const touch = event.touches[0];
+                    updatePointer(touch.clientX, touch.clientY);
+                }
+            }, { passive: true });
+
+            heroSection.addEventListener('click', (event) => {
+                spawnRipple(event.clientX, event.clientY);
+            });
+
+            heroSection.addEventListener('touchstart', (event) => {
+                if (event.touches.length > 0) {
+                    const touch = event.touches[0];
+                    spawnRipple(touch.clientX, touch.clientY);
+                }
+            }, { passive: true });
+
+            window.addEventListener('scroll', updateScrollOffset, { passive: true });
+            updateScrollOffset();
         }
 
         // Pricing toggle (monthly / yearly)

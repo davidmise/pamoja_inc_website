@@ -145,6 +145,73 @@
             z-index: 0;
         }
 
+        /* ==============================
+           FLOATING NAV (landscape only)
+           ============================== */
+
+        /* Hidden by default — portrait & mobile */
+        .floating-nav {
+            display: none;
+        }
+
+        @media (orientation: landscape) {
+            /* Hide regular sticky nav */
+            body > nav:first-of-type {
+                display: none;
+            }
+
+            /* Hero fills full screen */
+            #home {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            /* Show floating pill nav */
+            .floating-nav {
+                display: flex;
+                position: fixed;
+                top: 18px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 60;
+                align-items: center;
+                gap: 1.25rem;
+                padding: 0.55rem 1.5rem;
+                border-radius: 999px;
+                -webkit-backdrop-filter: blur(14px);
+                backdrop-filter: blur(14px);
+                background: rgba(255, 255, 255, 0.72);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), 0 1.5px 4px rgba(0, 0, 0, 0.06);
+                transition: opacity 0.4s ease, transform 0.4s ease;
+                white-space: nowrap;
+            }
+
+            .floating-nav.nav-hidden {
+                opacity: 0;
+                pointer-events: none;
+                transform: translateX(-50%) translateY(-14px);
+            }
+        }
+
+        /* Tighter pill on short landscape phones (e.g. iPhone SE landscape) */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .floating-nav {
+                padding: 0.35rem 1rem;
+                gap: 0.75rem;
+                top: 10px;
+            }
+            .floating-nav a,
+            .floating-nav span {
+                font-size: 0.72rem !important;
+            }
+            .floating-nav .fnav-logo {
+                height: 1.5rem;
+            }
+        }
+
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -194,6 +261,23 @@
                 </div>
             </div>
         </div>
+    </nav>
+
+    <!-- Floating Nav (landscape only) -->
+    <nav id="floating-nav" class="floating-nav" aria-label="Floating navigation">
+        <a href="#home" class="flex items-center flex-shrink-0">
+            <img src="Pamoja-inc-Logo.png" alt="Pamoja INC" class="fnav-logo h-8">
+        </a>
+        <div class="w-px h-5 bg-gray-300 flex-shrink-0" aria-hidden="true"></div>
+        <a href="#home" class="nav-link text-sm font-medium text-gray-700 hover:text-pamoja-red">Home</a>
+        <a href="#services" class="nav-link text-sm font-medium text-gray-700 hover:text-pamoja-red">Services</a>
+        <a href="#email-hosting" class="nav-link text-sm font-medium text-gray-700 hover:text-pamoja-red">Email Hosting</a>
+        <a href="#technology" class="nav-link text-sm font-medium text-gray-700 hover:text-pamoja-red">Technology</a>
+        <a href="#contact" class="nav-link text-sm font-medium text-gray-700 hover:text-pamoja-red">Contact</a>
+        <a href="https://pcrm.pamojainc.co.tz/" target="_blank" rel="noopener noreferrer"
+           class="bg-pamoja-dark text-white text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-opacity-90 transition-colors flex-shrink-0">
+            PCRM <i class="fas fa-external-link-alt text-xs ml-0.5"></i>
+        </a>
     </nav>
 
     <!-- Hero Section -->
@@ -545,6 +629,30 @@
                 }
             });
         });
+
+        // Floating nav: hide when hero scrolls out of view (landscape only)
+        const floatingNav = document.getElementById('floating-nav');
+        if (floatingNav) {
+            const heroSection = document.getElementById('home');
+            const landscapeQuery = window.matchMedia('(orientation: landscape)');
+
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (landscapeQuery.matches) {
+                        floatingNav.classList.toggle('nav-hidden', !entry.isIntersecting);
+                    }
+                });
+            }, { threshold: 0 });
+
+            heroObserver.observe(heroSection);
+
+            // When switching back to portrait, ensure nav-hidden is cleared
+            landscapeQuery.addEventListener('change', () => {
+                if (!landscapeQuery.matches) {
+                    floatingNav.classList.remove('nav-hidden');
+                }
+            });
+        }
 
         // Pricing toggle (monthly / yearly)
         const billingToggle = document.getElementById('billingToggle');
